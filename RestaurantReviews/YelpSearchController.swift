@@ -57,9 +57,8 @@ class YelpSearchController: UIViewController {
     /// token and (2) if the user has authorized location access for whenInUse tracking.
     func checkPermissions() {
         let isAuthorizedForLocation = false
-        let isAuthenticatedWithToken = false
         
-        let permissionsController = PermissionsController(isAuthorizedForLocation: isAuthorizedForLocation, isAuthenticatedWithToken: isAuthenticatedWithToken)
+        let permissionsController = PermissionsController(isAuthorizedForLocation: isAuthorizedForLocation)
         present(permissionsController, animated: true, completion: nil)
     }
 }

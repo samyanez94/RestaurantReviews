@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2213FC34225726D300B08FDD /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2213FC33225726D300B08FDD /* OAuth2.framework */; };
 		97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629D91EC23110007BE0CE /* AppDelegate.swift */; };
 		97D629DC1EC23110007BE0CE /* YelpSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629DB1EC23110007BE0CE /* YelpSearchController.swift */; };
 		97D629DF1EC23110007BE0CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D629DD1EC23110007BE0CE /* Main.storyboard */; };
@@ -33,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2213FC33225726D300B08FDD /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/iOS/OAuth2.framework; sourceTree = "<group>"; };
 		97D629D61EC23110007BE0CE /* RestaurantReviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D629D91EC23110007BE0CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D629DB1EC23110007BE0CE /* YelpSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchController.swift; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2213FC34225726D300B08FDD /* OAuth2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +72,6 @@
 		2213FC32225726D300B08FDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2213FC33225726D300B08FDD /* OAuth2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,7 +242,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/OAuth2.framework",
 			);
 			outputFileListPaths = (
 			);
