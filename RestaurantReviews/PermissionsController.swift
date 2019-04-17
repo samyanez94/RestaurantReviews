@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PermissionsController: UIViewController {
+    
+    lazy var locationManager: LocationManager = {
+        return LocationManager(permissionsDelegate: self)
+    }()
     
     var isAuthorizedForLocation: Bool
     
@@ -83,10 +88,42 @@ class PermissionsController: UIViewController {
     }
     
     @objc func requestLocationPermissions() {
+        do {
+            try locationManager.requestLocationAuthorization()
+        } catch LocationError.disallowedByUser {
+            present(alertForLocationPermissionsDenied(), animated: true)
+        } catch {
+            print("Location Authorization Error: \(error.localizedDescription)")
+        }
     }
     
     @objc func dismissPermissions() {
         dismiss(animated: true, completion: nil)
     }
+}
 
+extension PermissionsController: LocationPermissionsDelegate {
+    
+    func authorizationSucceded() {
+        locationPermissionButton.setTitle("Location Permissions Granted", for: .disabled)
+        locationPermissionButton.isEnabled = false
+    }
+    
+    func authorizationFailed(_ status: CLAuthorizationStatus) {
+        present(alertForLocationPermissionsDenied(), animated: true)
+    }
+    
+    func alertForLocationPermissionsDenied() -> UIAlertController {
+        let alert = UIAlertController(title: "Location Access Required", message: "This app requires access to your location when in use. Please, allow this access in the Settings app.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        return alert
+    }
 }

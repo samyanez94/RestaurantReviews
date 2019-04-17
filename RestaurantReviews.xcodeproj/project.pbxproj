@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222919E72266D9820020E0F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222919E62266D9820020E0F4 /* LocationManager.swift */; };
 		97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629D91EC23110007BE0CE /* AppDelegate.swift */; };
 		97D629DC1EC23110007BE0CE /* YelpSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629DB1EC23110007BE0CE /* YelpSearchController.swift */; };
 		97D629DF1EC23110007BE0CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D629DD1EC23110007BE0CE /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		222919E62266D9820020E0F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		97D629D61EC23110007BE0CE /* RestaurantReviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D629D91EC23110007BE0CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D629DB1EC23110007BE0CE /* YelpSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				97D62A041EC233D8007BE0CE /* PermissionsController.swift */,
+				222919E62266D9820020E0F4 /* LocationManager.swift */,
 			);
 			name = Permissions;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				97D629F21EC231CC007BE0CE /* YelpReview.swift in Sources */,
 				97D629ED1EC231AA007BE0CE /* YelpBusinessDetailController.swift in Sources */,
 				97D62A011EC23350007BE0CE /* BusinessHours.swift in Sources */,
+				222919E72266D9820020E0F4 /* LocationManager.swift in Sources */,
 				97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */,
 				97D62A151EC239D6007BE0CE /* ReviewCell.swift in Sources */,
 				97D629F01EC231C4007BE0CE /* YelpBusiness.swift in Sources */,
