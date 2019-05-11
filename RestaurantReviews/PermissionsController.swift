@@ -2,7 +2,7 @@
 //  PermissionsController.swift
 //  RestaurantReviews
 //
-//  Created by Samuel Yanez on 5/9/17.
+//  Created by Samuel Yanez on 5/3/19.
 //  Copyright © 2019 Samuel Yanez. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ import CoreLocation
 class PermissionsController: UIViewController {
     
     lazy var locationManager: LocationManager = {
-        return LocationManager(permissionsDelegate: self)
+        return LocationManager(managerDelegate: nil, permissionsDelegate: self)
     }()
     
     var isAuthorizedForLocation: Bool
@@ -123,7 +123,6 @@ extension PermissionsController: LocationPermissionsDelegate {
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        
         return alert
     }
 }

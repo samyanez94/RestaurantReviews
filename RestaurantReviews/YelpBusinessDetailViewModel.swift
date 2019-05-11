@@ -2,8 +2,8 @@
 //  YelpBusinessDetailViewModel.swift
 //  RestaurantReviews
 //
-//  Created by Pasan Premaratne on 5/9/17.
-//  Copyright © 2017 Treehouse. All rights reserved.
+//  Created by Samuel Yanez on 5/3/19.
+//  Copyright © 2019 Samuel Yanez. All rights reserved.
 //
 
 import Foundation

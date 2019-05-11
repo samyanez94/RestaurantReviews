@@ -2,8 +2,8 @@
 //  YelpSearchController.swift
 //  RestaurantReviews
 //
-//  Created by Pasan Premaratne on 5/9/17.
-//  Copyright © 2017 Treehouse. All rights reserved.
+//  Created by Samuel Yanez on 5/3/19.
+//  Copyright © 2019 Samuel Yanez. All rights reserved.
 //
 
 import UIKit
@@ -13,12 +13,19 @@ class YelpSearchController: UIViewController {
     // MARK: - Properties
     
     let searchController = UISearchController(searchResultsController: nil)
-    @IBOutlet weak var tableView: UITableView!
     
     let dataSource = YelpSearchResultsDataSource()
     
+    lazy var locationManager: LocationManager = {
+        return LocationManager(managerDelegate: self, permissionsDelegate: nil)
+    }()
+    
+    var coordinate: Coordinate?
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     var isAuthorized: Bool {
-        return false
+        return LocationManager.isAuthorized
     }
 
     override func viewDidLoad() {
@@ -29,17 +36,20 @@ class YelpSearchController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if !isAuthorized {
+        if isAuthorized {
+            locationManager.requestLocation()
+        } else {
             checkPermissions()
         }
+        
     }
     
     // MARK: - Table View
+    
     func setupTableView() {
         self.tableView.dataSource = dataSource
         self.tableView.delegate = self
     }
-    
     
     // MARK: - Search
     
@@ -53,12 +63,8 @@ class YelpSearchController: UIViewController {
     
     // MARK: - Permissions
     
-    /// Checks (1) if the user is authenticated against the Yelp API and has an OAuth
-    /// token and (2) if the user has authorized location access for whenInUse tracking.
     func checkPermissions() {
-        let isAuthorizedForLocation = false
-        
-        let permissionsController = PermissionsController(isAuthorizedForLocation: isAuthorizedForLocation)
+        let permissionsController = PermissionsController(isAuthorizedForLocation: LocationManager.isAuthorized)
         present(permissionsController, animated: true, completion: nil)
     }
 }
@@ -83,6 +89,18 @@ extension YelpSearchController {
         if segue.identifier == "showBusiness" {
             
         }
+    }
+}
+
+// MARK: - Location Manager Delegate
+extension YelpSearchController: LocationManagerDelegate {
+    func obtainedCoordinates(_ coordinate: Coordinate) {
+        self.coordinate = coordinate
+        print(coordinate)
+    }
+    
+    func failedWithError(_ error: LocationError) {
+        print(error)
     }
 }
 
