@@ -107,6 +107,10 @@ extension PermissionsController: LocationPermissionsDelegate {
     func authorizationSucceded() {
         locationPermissionButton.setTitle("Location Permissions Granted", for: .disabled)
         locationPermissionButton.isEnabled = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
     
     func authorizationFailed(_ status: CLAuthorizationStatus) {
