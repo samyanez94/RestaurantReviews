@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class YelpSearchController: UIViewController {
     
@@ -17,10 +18,18 @@ class YelpSearchController: UIViewController {
     let dataSource = YelpSearchResultsDataSource()
     
     lazy var locationManager: LocationManager = {
-        return LocationManager(managerDelegate: self, permissionsDelegate: nil)
+        return LocationManager(managerDelegate: self, permissionsDelegate: self)
     }()
     
-    var coordinate: Coordinate?
+    lazy var client = YelpClient()
+    
+    var coordinate: Coordinate? {
+        didSet {
+            if let coordinate = coordinate {
+                showNearbyRestaurants(at: coordinate)
+            }
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,9 +48,8 @@ class YelpSearchController: UIViewController {
         if isAuthorized {
             locationManager.requestLocation()
         } else {
-            checkPermissions()
+            requestLocationAuthorization()
         }
-        
     }
     
     // MARK: - Table View
@@ -63,23 +71,64 @@ class YelpSearchController: UIViewController {
     
     // MARK: - Permissions
     
-    func checkPermissions() {
-        let permissionsController = PermissionsController(isAuthorizedForLocation: LocationManager.isAuthorized)
-        present(permissionsController, animated: true, completion: nil)
+    func requestLocationAuthorization() {
+        do {
+            try locationManager.requestLocationAuthorization()
+        } catch LocationError.disallowedByUser {
+            present(alertForLocationPermissionsDenied(), animated: true)
+        } catch {
+            print("Location Authorization Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func alertForLocationPermissionsDenied() -> UIAlertController {
+        let alert = UIAlertController(title: "Location Access Required", message: "This app requires access to your location when in use. Please, allow access in the Settings app.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }))
+        return alert
+    }
+    
+    func showNearbyRestaurants(at coordinate: Coordinate) {
+        client.search(withTearm: "", at: coordinate) { [weak self] (result) in
+            switch result {
+            case .success(let businesses):
+                self?.dataSource.update(with: businesses)
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
 // MARK: - UITableViewDelegate
 extension YelpSearchController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showBusiness", sender: nil)
+    }
 }
 
 // MARK: - Search Results
 extension YelpSearchController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchTerm = searchController.searchBar.text else { return }
+        guard let searchTerm = searchController.searchBar.text, let coordinate = coordinate else { return }
         
-        print("Search text: \(searchTerm)")
+        if !searchTerm.isEmpty {
+            client.search(withTearm: searchTerm, at: coordinate) { [weak self] (result) in
+                switch result {
+                case .success(let businesses):
+                    self?.dataSource.update(with: businesses)
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }
 
@@ -92,11 +141,20 @@ extension YelpSearchController {
     }
 }
 
+extension YelpSearchController: LocationPermissionsDelegate {
+    
+    func authorizationSucceded() {
+    }
+    
+    func authorizationFailed(_ status: CLAuthorizationStatus) {
+        present(alertForLocationPermissionsDenied(), animated: true)
+    }
+}
+
 // MARK: - Location Manager Delegate
 extension YelpSearchController: LocationManagerDelegate {
     func obtainedCoordinates(_ coordinate: Coordinate) {
         self.coordinate = coordinate
-        print(coordinate)
     }
     
     func failedWithError(_ error: LocationError) {

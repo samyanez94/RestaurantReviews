@@ -30,5 +30,4 @@ class ReviewCell: UITableViewCell {
         reviewLabel.text = viewModel.review
         userImageView.image = viewModel.userImage
     }
-
 }
