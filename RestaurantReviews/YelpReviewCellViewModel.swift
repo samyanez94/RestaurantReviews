@@ -1,5 +1,5 @@
 //
-//  ReviewCellViewModel.swift
+//  YelpReviewCellViewModel.swift
 //  RestaurantReviews
 //
 //  Created by Samuel Yanez on 5/3/19.
@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-struct ReviewCellViewModel {
+struct YelpReviewCellViewModel {
     let review: String
     let userImage: UIImage
 }
 
-extension ReviewCellViewModel {
+extension YelpReviewCellViewModel {
     init(review: YelpReview) {
         self.review = review.text
         self.userImage = review.user.image ?? #imageLiteral(resourceName: "Placeholder")

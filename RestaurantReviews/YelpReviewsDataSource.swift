@@ -28,10 +28,10 @@ class YelpReviewsDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReviewCell.reuseIdentifier, for: indexPath) as! ReviewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: YelpReviewCell.reuseIdentifier, for: indexPath) as! YelpReviewCell
         
         let review = object(at: indexPath)
-        let viewModel = ReviewCellViewModel(review: review)
+        let viewModel = YelpReviewCellViewModel(review: review)
         
         cell.configure(with: viewModel)
         

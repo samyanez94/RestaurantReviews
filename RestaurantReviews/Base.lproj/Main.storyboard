@@ -153,7 +153,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReviewCell" rowHeight="92" id="NP2-CU-jZQ" customClass="ReviewCell" customModule="RestaurantReviews" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReviewCell" rowHeight="92" id="NP2-CU-jZQ" customClass="YelpReviewCell" customModule="RestaurantReviews" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="215.5" width="375" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NP2-CU-jZQ" id="dig-SG-kXH">

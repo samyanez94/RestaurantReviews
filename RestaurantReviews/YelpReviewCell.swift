@@ -1,5 +1,5 @@
 //
-//  ReviewCell.swift
+//  YelpReviewCell.swift
 //  RestaurantReviews
 //
 //  Created by Samuel Yanez on 5/3/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewCell: UITableViewCell {
+class YelpReviewCell: UITableViewCell {
     
     static let reuseIdentifier = "ReviewCell"
     
@@ -26,7 +26,7 @@ class ReviewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(with viewModel: ReviewCellViewModel) {
+    func configure(with viewModel: YelpReviewCellViewModel) {
         reviewLabel.text = viewModel.review
         userImageView.image = viewModel.userImage
     }
