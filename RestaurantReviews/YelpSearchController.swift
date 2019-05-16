@@ -136,15 +136,13 @@ extension YelpSearchController: UISearchResultsUpdating {
 extension YelpSearchController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showBusiness" {
-            
         }
     }
 }
 
 extension YelpSearchController: LocationPermissionsDelegate {
     
-    func authorizationSucceded() {
-    }
+    func authorizationSucceded() {}
     
     func authorizationFailed(_ status: CLAuthorizationStatus) {
         present(alertForLocationPermissionsDenied(), animated: true)

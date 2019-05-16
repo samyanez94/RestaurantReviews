@@ -11,6 +11,7 @@
 		22848F7322873839006E0870 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F7222873839006E0870 /* APIClient.swift */; };
 		22848F7522877AAB006E0870 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F7422877AAB006E0870 /* YelpClient.swift */; };
 		22848F77228785E7006E0870 /* YelpKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F76228785E7006E0870 /* YelpKeys.swift */; };
+		22848F792287F057006E0870 /* YelpBusinessDetailsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */; };
 		97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629D91EC23110007BE0CE /* AppDelegate.swift */; };
 		97D629DC1EC23110007BE0CE /* YelpSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629DB1EC23110007BE0CE /* YelpSearchController.swift */; };
 		97D629DF1EC23110007BE0CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D629DD1EC23110007BE0CE /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		22848F7222873839006E0870 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		22848F7422877AAB006E0870 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		22848F76228785E7006E0870 /* YelpKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpKeys.swift; sourceTree = "<group>"; };
+		22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessDetailsOperation.swift; sourceTree = "<group>"; };
 		97D629D61EC23110007BE0CE /* RestaurantReviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D629D91EC23110007BE0CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D629DB1EC23110007BE0CE /* YelpSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				22848F7222873839006E0870 /* APIClient.swift */,
 				22848F7422877AAB006E0870 /* YelpClient.swift */,
 				22848F76228785E7006E0870 /* YelpKeys.swift */,
+				22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				97D629FB1EC232FA007BE0CE /* JSONDecodable.swift in Sources */,
 				22848F77228785E7006E0870 /* YelpKeys.swift in Sources */,
+				22848F792287F057006E0870 /* YelpBusinessDetailsOperation.swift in Sources */,
 				97D629F81EC23226007BE0CE /* YelpTransaction.swift in Sources */,
 				97D629F61EC23208007BE0CE /* Coordinate.swift in Sources */,
 				97D62A111EC2395E007BE0CE /* YelpBusinessDetailViewModel.swift in Sources */,
