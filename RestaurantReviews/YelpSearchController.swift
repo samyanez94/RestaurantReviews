@@ -31,6 +31,8 @@ class YelpSearchController: UIViewController {
         }
     }
     
+    let queue = OperationQueue()
+    
     @IBOutlet weak var tableView: UITableView!
     
     var isAuthorized: Bool {
@@ -109,7 +111,15 @@ class YelpSearchController: UIViewController {
 // MARK: - UITableViewDelegate
 extension YelpSearchController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showBusiness", sender: nil)
+        let business = dataSource.object(at: indexPath)
+        let operation = YelpBusinessDetailsOperation(business: business, client: client)
+        operation.completionBlock = {
+            DispatchQueue.main.async {
+                self.dataSource.update(business, at: indexPath)
+                self.performSegue(withIdentifier: "showBusiness", sender: nil)
+            }
+        }
+        queue.addOperation(operation)
     }
 }
 
@@ -135,7 +145,10 @@ extension YelpSearchController: UISearchResultsUpdating {
 // MARK: - Navigation
 extension YelpSearchController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showBusiness" {
+        if segue.identifier == "showBusiness", let indexPath = tableView.indexPathForSelectedRow {
+            let business = dataSource.object(at: indexPath)
+            let detailController = segue.destination as! YelpBusinessDetailController
+            detailController.business = business
         }
     }
 }
