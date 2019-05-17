@@ -22,7 +22,7 @@ class YelpClient: APIClient {
     func search(withTearm tearm: String, at coordinate: Coordinate, categories: [YelpCategory] = [], radius: Int? = nil, limit: Int = 50, sortBy sortType: Yelp.YelpSortType = .rating, completion: @escaping (Result<[YelpBusiness], APIError>) -> Void) {
         let endpoint = Yelp.search(term: tearm, coordinate: coordinate, radius: radius, categories: categories, limit: limit, sortBy: sortType)
         let request = endpoint.authorizedRequest(withKey: YelpKeys.token)
-        fetch(with: request, parse: { (json) -> [YelpBusiness] in
+        fetch(with: request, parse: { json -> [YelpBusiness] in
             guard let businesses = json["businesses"] as? [[String: Any]] else { return [] }
             return businesses.compactMap { YelpBusiness(json: $0) }
         }, completion: completion)
@@ -42,6 +42,15 @@ class YelpClient: APIClient {
         fetch(with: request, parse: { json -> YelpBusiness? in
             business.updateWithHoursAndPhotos(json: json)
             return business
+        }, completion: completion)
+    }
+    
+    func reviews(for business: YelpBusiness, completion: @escaping (Result<[YelpReview], APIError>) -> Void) {
+        let endpoint = Yelp.reviews(businessId: business.id)
+        let request = endpoint.authorizedRequest(withKey: YelpKeys.token)
+        fetch(with: request, parse: { json -> [YelpReview] in
+            guard let reviews = json["reviews"] as? [[String: Any]] else { return [] }
+            return reviews.compactMap { YelpReview(json: $0) }
         }, completion: completion)
     }
 }

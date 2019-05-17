@@ -12,6 +12,7 @@
 		22848F7522877AAB006E0870 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F7422877AAB006E0870 /* YelpClient.swift */; };
 		22848F77228785E7006E0870 /* YelpKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F76228785E7006E0870 /* YelpKeys.swift */; };
 		22848F792287F057006E0870 /* YelpBusinessDetailsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */; };
+		22D289BB228E787A00793743 /* YelpBusinessReviewsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D289BA228E787A00793743 /* YelpBusinessReviewsOperation.swift */; };
 		97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629D91EC23110007BE0CE /* AppDelegate.swift */; };
 		97D629DC1EC23110007BE0CE /* YelpSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629DB1EC23110007BE0CE /* YelpSearchController.swift */; };
 		97D629DF1EC23110007BE0CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D629DD1EC23110007BE0CE /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		22848F7422877AAB006E0870 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		22848F76228785E7006E0870 /* YelpKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpKeys.swift; sourceTree = "<group>"; };
 		22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessDetailsOperation.swift; sourceTree = "<group>"; };
+		22D289BA228E787A00793743 /* YelpBusinessReviewsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessReviewsOperation.swift; sourceTree = "<group>"; };
 		97D629D61EC23110007BE0CE /* RestaurantReviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D629D91EC23110007BE0CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D629DB1EC23110007BE0CE /* YelpSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				22848F7422877AAB006E0870 /* YelpClient.swift */,
 				22848F76228785E7006E0870 /* YelpKeys.swift */,
 				22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */,
+				22D289BA228E787A00793743 /* YelpBusinessReviewsOperation.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				22848F7522877AAB006E0870 /* YelpClient.swift in Sources */,
 				97D629F01EC231C4007BE0CE /* YelpBusiness.swift in Sources */,
 				97D629FF1EC2332D007BE0CE /* Address.swift in Sources */,
+				22D289BB228E787A00793743 /* YelpBusinessReviewsOperation.swift in Sources */,
 				97D62A171EC245BB007BE0CE /* YelpReviewCellViewModel.swift in Sources */,
 				97D629FD1EC23311007BE0CE /* YelpCategory.swift in Sources */,
 			);

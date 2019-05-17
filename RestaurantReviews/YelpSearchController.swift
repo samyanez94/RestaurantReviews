@@ -112,14 +112,17 @@ class YelpSearchController: UIViewController {
 extension YelpSearchController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let business = dataSource.object(at: indexPath)
-        let operation = YelpBusinessDetailsOperation(business: business, client: client)
-        operation.completionBlock = {
+        let detailsOperation = YelpBusinessDetailsOperation(business: business, client: client)
+        let reviewsOperation = YelpBusinessReviewsOperation(business: business, client: client)
+        reviewsOperation.addDependency(detailsOperation)
+        reviewsOperation.completionBlock = {
             DispatchQueue.main.async {
                 self.dataSource.update(business, at: indexPath)
                 self.performSegue(withIdentifier: "showBusiness", sender: nil)
             }
         }
-        queue.addOperation(operation)
+        queue.addOperation(detailsOperation)
+        queue.addOperation(reviewsOperation)
     }
 }
 
@@ -149,6 +152,7 @@ extension YelpSearchController {
             let business = dataSource.object(at: indexPath)
             let detailController = segue.destination as! YelpBusinessDetailController
             detailController.business = business
+            detailController.dataSource.updateData(business.reviews)
         }
     }
 }
