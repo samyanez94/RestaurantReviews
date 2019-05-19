@@ -13,6 +13,7 @@
 		22848F77228785E7006E0870 /* YelpKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F76228785E7006E0870 /* YelpKeys.swift */; };
 		22848F792287F057006E0870 /* YelpBusinessDetailsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */; };
 		22D289BB228E787A00793743 /* YelpBusinessReviewsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D289BA228E787A00793743 /* YelpBusinessReviewsOperation.swift */; };
+		22D289BD228E836800793743 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D289BC228E836800793743 /* MapKit.framework */; };
 		97D629DA1EC23110007BE0CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629D91EC23110007BE0CE /* AppDelegate.swift */; };
 		97D629DC1EC23110007BE0CE /* YelpSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D629DB1EC23110007BE0CE /* YelpSearchController.swift */; };
 		97D629DF1EC23110007BE0CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D629DD1EC23110007BE0CE /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		22848F76228785E7006E0870 /* YelpKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpKeys.swift; sourceTree = "<group>"; };
 		22848F782287F057006E0870 /* YelpBusinessDetailsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessDetailsOperation.swift; sourceTree = "<group>"; };
 		22D289BA228E787A00793743 /* YelpBusinessReviewsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessReviewsOperation.swift; sourceTree = "<group>"; };
+		22D289BC228E836800793743 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		97D629D61EC23110007BE0CE /* RestaurantReviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D629D91EC23110007BE0CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D629DB1EC23110007BE0CE /* YelpSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D289BD228E836800793743 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 		2213FC32225726D300B08FDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22D289BC228E836800793743 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,6 +218,11 @@
 						DevelopmentTeam = QFXSZ288GU;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

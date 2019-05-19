@@ -8,11 +8,11 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class YelpSearchController: UIViewController {
     
     // MARK: - Properties
-    
     let searchController = UISearchController(searchResultsController: nil)
     
     let dataSource = YelpSearchResultsDataSource()
@@ -34,6 +34,8 @@ class YelpSearchController: UIViewController {
     let queue = OperationQueue()
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet var mapView: MKMapView!
     
     var isAuthorized: Bool {
         return LocationManager.isAuthorized
@@ -170,6 +172,7 @@ extension YelpSearchController: LocationPermissionsDelegate {
 extension YelpSearchController: LocationManagerDelegate {
     func obtainedCoordinates(_ coordinate: Coordinate) {
         self.coordinate = coordinate
+        adjustMap(with: coordinate)
     }
     
     func failedWithError(_ error: LocationError) {
@@ -177,3 +180,11 @@ extension YelpSearchController: LocationManagerDelegate {
     }
 }
 
+// MARK: - MapKit
+extension YelpSearchController {
+    func adjustMap(with coordinate: Coordinate) {
+        let coordinate2D = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let region = MKCoordinateRegion(center: coordinate2D, latitudinalMeters: 2500, longitudinalMeters: 2500)
+        mapView.setRegion(region, animated: true)
+    }
+}
