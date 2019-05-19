@@ -12,7 +12,6 @@ class YelpBusinessDetailController: UITableViewController {
 
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var ratingsCountLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var currentHoursStatusLabel: UILabel! {
@@ -48,7 +47,6 @@ class YelpBusinessDetailController: UITableViewController {
     func configure(with viewModel: YelpBusinessDetailViewModel) {
         restaurantNameLabel.text = viewModel.restaurantName
         priceLabel.text = viewModel.price
-        ratingsCountLabel.text = viewModel.ratingsCount
         categoriesLabel.text = viewModel.categories
         hoursLabel.text = viewModel.hours
         currentHoursStatusLabel.text = viewModel.currentStatus

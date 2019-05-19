@@ -39,7 +39,7 @@ class YelpSearchResultsDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "Restaurants"
+        case 0: return "Businesses"
         default: return nil
         }
     }
@@ -48,6 +48,13 @@ class YelpSearchResultsDataSource: NSObject, UITableViewDataSource {
     
     func object(at indexPath: IndexPath) -> YelpBusiness {
         return data[indexPath.row]
+    }
+    
+    func indexPathFor(_ object: YelpBusiness) -> IndexPath? {
+        if let row = data.firstIndex(of: object) {
+            return IndexPath(row: row, section: 0)
+        }
+        return nil
     }
     
     func update(with data: [YelpBusiness]) {

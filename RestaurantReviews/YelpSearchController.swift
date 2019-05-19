@@ -44,6 +44,8 @@ class YelpSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
+        
         setupSearchBar()
         setupTableView()
     }
@@ -73,6 +75,19 @@ class YelpSearchController: UIViewController {
         searchController.searchResultsUpdater = self
     }
     
+    func showNearbyRestaurants(at coordinate: Coordinate) {
+        client.search(withTearm: "", at: coordinate) { [weak self] (result) in
+            switch result {
+            case .success(let businesses):
+                self?.dataSource.update(with: businesses)
+                self?.mapView.addAnnotations(businesses)
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     // MARK: - Permissions
     
     func requestLocationAuthorization() {
@@ -95,18 +110,6 @@ class YelpSearchController: UIViewController {
             }
         }))
         return alert
-    }
-    
-    func showNearbyRestaurants(at coordinate: Coordinate) {
-        client.search(withTearm: "", at: coordinate) { [weak self] (result) in
-            switch result {
-            case .success(let businesses):
-                self?.dataSource.update(with: businesses)
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 }
 
@@ -137,8 +140,11 @@ extension YelpSearchController: UISearchResultsUpdating {
             client.search(withTearm: searchTerm, at: coordinate) { [weak self] (result) in
                 switch result {
                 case .success(let businesses):
-                    self?.dataSource.update(with: businesses)
-                    self?.tableView.reloadData()
+                    guard let self = self else { return }
+                    self.dataSource.update(with: businesses)
+                    self.mapView.removeAnnotations(self.mapView.annotations)
+                    self.mapView.addAnnotations(businesses)
+                    self.tableView.reloadData()
                 case .failure(let error):
                     print(error)
                 }
@@ -181,10 +187,24 @@ extension YelpSearchController: LocationManagerDelegate {
 }
 
 // MARK: - MapKit
-extension YelpSearchController {
+extension YelpSearchController: MKMapViewDelegate {
     func adjustMap(with coordinate: Coordinate) {
         let coordinate2D = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let region = MKCoordinateRegion(center: coordinate2D, latitudinalMeters: 2500, longitudinalMeters: 2500)
         mapView.setRegion(region, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation else {
+            return
+        }
+        guard let business = annotation as? YelpBusiness else {
+            return
+        }
+        guard let indexPath = self.dataSource.indexPathFor(business) else {
+            return
+        }
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
     }
 }

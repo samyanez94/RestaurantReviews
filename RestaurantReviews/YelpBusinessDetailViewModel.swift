@@ -29,11 +29,10 @@ extension YelpBusinessDetailViewModel {
         
         guard let hours = business.hours else { return nil }
         
-        let today = hours.schedule.filter({ $0.day.rawValue == Date.currentDay }).first!
+        guard let today = hours.schedule.filter({ $0.day.rawValue == Date.currentDay }).first else { return nil }
         
         let startString = DateFormatter.stringFromDateString(today.start, withInputDateFormat: "HHmm")
         let endString = DateFormatter.stringFromDateString(today.end, withInputDateFormat: "HHmm")
-        
         
         self.hours = "Hours Today: \(startString) - \(endString)"
         self.currentStatus = business.isClosed ? "Closed" : "Open"

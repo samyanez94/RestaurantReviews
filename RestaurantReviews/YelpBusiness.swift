@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import MapKit
 
 class YelpBusiness: NSObject, JSONDecodable {
+    
     let id: String
     let name: String
     let imageUrl: String
@@ -86,5 +88,31 @@ class YelpBusiness: NSObject, JSONDecodable {
         if let hours = json["hours"] as? [[String: Any]], let dict = hours.first {
             self.hours = BusinessHours(json: dict)
         }
+    }
+    
+    static func == (lhs: YelpBusiness, rhs: YelpBusiness) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? YelpBusiness {
+            return self.id == object.id
+        }
+        return false
+    }
+}
+
+extension YelpBusiness: MKAnnotation {
+    
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+    }
+    
+    var title: String? {
+        return name
+    }
+    
+    var subtitle: String? {
+        return isClosed ? "Closed" : "Open"
     }
 }
