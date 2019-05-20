@@ -35,6 +35,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app uses location data to find restaurants nearby.</string>
+	<string>This app uses location data to find nearby businesses.</string>
 </dict>
 </plist>

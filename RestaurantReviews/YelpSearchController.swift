@@ -168,7 +168,9 @@ extension YelpSearchController {
 
 extension YelpSearchController: LocationPermissionsDelegate {
     
-    func authorizationSucceded() {}
+    func authorizationSucceded() {
+        locationManager.requestLocation()
+    }
     
     func authorizationFailed(_ status: CLAuthorizationStatus) {
         present(alertForLocationPermissionsDenied(), animated: true)
