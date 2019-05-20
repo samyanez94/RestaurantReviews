@@ -9,11 +9,20 @@
 import Foundation
 import UIKit
 
+protocol YelpReviewsDataSourceDelegate {
+    func reloadData()
+}
+
 class YelpReviewsDataSource: NSObject, UITableViewDataSource {
     private var data: [YelpReview]
     
-    init(data: [YelpReview]) {
+    let pendingOperations = PendingOperations()
+    
+    let delegate: YelpReviewsDataSourceDelegate
+    
+    init(data: [YelpReview], delegate: YelpReviewsDataSourceDelegate) {
         self.data = data
+        self.delegate = delegate
         super.init()
     }
     
@@ -35,6 +44,10 @@ class YelpReviewsDataSource: NSObject, UITableViewDataSource {
         
         cell.configure(with: viewModel)
         
+        if review.user.imageState == .placeholder {
+            downloadImage(for: review.user, atIndexPath: indexPath)
+        }
+        
         return cell
     }
     
@@ -54,5 +67,25 @@ class YelpReviewsDataSource: NSObject, UITableViewDataSource {
     
     func object(at indexPath: IndexPath) -> YelpReview {
         return data[indexPath.row]
+    }
+    
+    func downloadImage(for user: YelpUser, atIndexPath indexPath: IndexPath) {
+        if let _ = pendingOperations.downloadsInProgress[indexPath] {
+            return
+        }
+        
+        let downloader = YelpUserImageOperation(user: user)
+        
+        downloader.completionBlock = {
+            if downloader.isCancelled {
+                return
+            }
+            DispatchQueue.main.async {
+                self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
+                self.delegate.reloadData()
+            }
+        }
+        pendingOperations.downloadsInProgress[indexPath] = downloader
+        pendingOperations.downloadQueue.addOperation(downloader)
     }
 }

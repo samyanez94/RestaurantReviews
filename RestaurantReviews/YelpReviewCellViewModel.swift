@@ -11,12 +11,12 @@ import UIKit
 
 struct YelpReviewCellViewModel {
     let review: String
-    let userImage: UIImage
+    let userImage: UIImage?
 }
 
 extension YelpReviewCellViewModel {
     init(review: YelpReview) {
         self.review = review.text
-        self.userImage = review.user.image ?? #imageLiteral(resourceName: "Placeholder")
+        self.userImage = review.user.image ?? nil
     }
 }

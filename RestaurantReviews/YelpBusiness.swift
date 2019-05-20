@@ -32,6 +32,7 @@ class YelpBusiness: NSObject, JSONDecodable {
     // Detail properties
     var photos: [String]
     var hours: BusinessHours?
+    var isOpenNow: Bool
     var reviews: [YelpReview]
     
     required init?(json: [String : Any]) {
@@ -75,6 +76,8 @@ class YelpBusiness: NSObject, JSONDecodable {
             self.hours = BusinessHours(json: dict)
         }
         
+        self.isOpenNow = self.hours?.isOpenNow ?? false
+        
         self.reviews = []
         
         super.init()
@@ -88,6 +91,7 @@ class YelpBusiness: NSObject, JSONDecodable {
         if let hours = json["hours"] as? [[String: Any]], let dict = hours.first {
             self.hours = BusinessHours(json: dict)
         }
+        self.isOpenNow = self.hours?.isOpenNow ?? false
     }
     
     static func == (lhs: YelpBusiness, rhs: YelpBusiness) -> Bool {
@@ -110,9 +114,5 @@ extension YelpBusiness: MKAnnotation {
     
     var title: String? {
         return name
-    }
-    
-    var subtitle: String? {
-        return isClosed ? "Closed" : "Open"
     }
 }

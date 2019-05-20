@@ -35,7 +35,7 @@ extension YelpBusinessDetailViewModel {
         let endString = DateFormatter.stringFromDateString(today.end, withInputDateFormat: "HHmm")
         
         self.hours = "Hours Today: \(startString) - \(endString)"
-        self.currentStatus = business.isClosed ? "Closed" : "Open"
+        self.currentStatus = business.isOpenNow ? "Open" : "Closed"
     }
 }
 

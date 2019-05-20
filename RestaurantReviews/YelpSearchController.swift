@@ -161,6 +161,7 @@ extension YelpSearchController {
             let detailController = segue.destination as! YelpBusinessDetailController
             detailController.business = business
             detailController.dataSource.updateData(business.reviews)
+            detailController.tableView.reloadData()
         }
     }
 }
@@ -204,7 +205,8 @@ extension YelpSearchController: MKMapViewDelegate {
         guard let indexPath = self.dataSource.indexPathFor(business) else {
             return
         }
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+//        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         
     }
 }

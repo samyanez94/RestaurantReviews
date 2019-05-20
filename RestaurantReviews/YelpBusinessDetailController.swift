@@ -14,20 +14,12 @@ class YelpBusinessDetailController: UITableViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
-    @IBOutlet weak var currentHoursStatusLabel: UILabel! {
-        didSet {
-            if currentHoursStatusLabel.text == "Open" {
-                currentHoursStatusLabel.textColor = UIColor(red: 2/255.0, green: 192/255.0, blue: 97/255.0, alpha: 1.0)
-            } else {
-                currentHoursStatusLabel.textColor = UIColor(red: 209/255.0, green: 47/255.0, blue: 27/255.0, alpha: 1.0)
-            }
-        }
-    }
+    @IBOutlet weak var currentHoursStatusLabel: UILabel!
     
     var business: YelpBusiness?
     
     lazy var dataSource: YelpReviewsDataSource = {
-        return YelpReviewsDataSource(data: [])
+        return YelpReviewsDataSource(data: [], delegate: self)
     }()
     
     override func viewDidLoad() {
@@ -37,6 +29,7 @@ class YelpBusinessDetailController: UITableViewController {
         
         if let business = business, let viewModel = YelpBusinessDetailViewModel(business: business) {
             configure(with: viewModel)
+            setStatusColor()
         }
     }
     
@@ -51,6 +44,16 @@ class YelpBusinessDetailController: UITableViewController {
         hoursLabel.text = viewModel.hours
         currentHoursStatusLabel.text = viewModel.currentStatus
     }
+    
+    func setStatusColor() {
+        guard let business = business else { return }
+        
+        if business.isOpenNow {
+            currentHoursStatusLabel.textColor = UIColor(red: 2/255.0, green: 192/255.0, blue: 97/255.0, alpha: 1.0)
+        } else {
+            currentHoursStatusLabel.textColor = UIColor(red: 209/255.0, green: 47/255.0, blue: 27/255.0, alpha: 1.0)
+        }
+    }
 
     // MARK: - Table View
     
@@ -59,5 +62,11 @@ class YelpBusinessDetailController: UITableViewController {
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
+    }
+}
+
+extension YelpBusinessDetailController: YelpReviewsDataSourceDelegate {
+    func reloadData() {
+        tableView.reloadData()
     }
 }
