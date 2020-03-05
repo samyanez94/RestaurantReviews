@@ -6,6 +6,10 @@ App that fetches businesses reviews using the [Yelp Fusion API](https://www.yelp
 ![alt tag](https://i.imgur.com/knUyJcHl.png)
 ![alt tag](https://i.imgur.com/FC25JBhl.png)
 
+## Author
+
+* Samuel Yanez ~ [samyanez94](https://github.com/samyanez94)
+
 ## License
 
 MIT © Samuel Yanez
